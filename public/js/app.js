@@ -12,8 +12,8 @@ weatherForm.addEventListener('submit',(e)=>{
             if(data.error){
                 messageOne.textContent=error;                
             }else{
-                messageOne.textContent='The Weather is described as:'
-                messageTwo.textContent= data.description;   
+                messageOne.textContent='The Weather is described as: '+data.description;
+                messageTwo.textContent= 'The cityName and timezone Followed are :'+data.cityname+' '+ data.timezone;   
             }
         })
     })

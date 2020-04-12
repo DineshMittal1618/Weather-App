@@ -10,7 +10,12 @@ const forecast=(latitude,longitude,callback)=>{
             {
                 callback('Unable to Find the parameter',undefined)
             }else{
-                callback(undefined,response.body.data[0].weather)
+                const data={
+                    description:response.body.data[0].weather.description,
+                    cityname:response.body.data[0].city_name,
+                    timezone:response.body.data[0].timezone
+                }
+                callback(undefined,data)
             }
 })
 
