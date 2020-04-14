@@ -8,6 +8,8 @@ const port=process.env.PORT || 3000;
 const pathName=path.join(__dirname,'../public');
 const viewPath=path.join(__dirname,'../templates/views');
 const partialPath=path.join(__dirname,'../templates/partials')
+const formidable=require('formidable');
+const fs=require('fs')
 
 app.use(express.static(pathName));
 
@@ -48,15 +50,15 @@ app.get('/temp',(req,res)=>{
         
 })
 
-app.get('/fileupload',(req,res)=>{
+app.post('/fileupload',(req,res)=>{
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-      var oldpath = files.fileToUpload;
+      var oldpath = files.fileToUpload.path;
       console.log(files.fileToUpload);
-      var newpath = 'C:/Users/Lenovo/Desktop/Learn Node/CC project/upload/'+files.fileToUpload;
+      var newpath = 'C:/Users/Lenovo/Desktop/Learn Node/Web-Server/public/upload/'+files.fileToUpload.name;
       fs.rename(oldpath, newpath, function (err) {
-        if (err) throw err;
-        res.write('File uploaded and moved!');
+        if (err) return err;
+        res.send('File uploaded and moved!');
     }
       )
 })})
